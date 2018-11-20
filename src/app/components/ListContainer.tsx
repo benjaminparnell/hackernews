@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import api from '../api';
 
 import List from './List';
+import Loading from './Loading';
 
 export type Post = {
   title: string;
@@ -16,14 +17,26 @@ type Props = {
   type: 'top' | 'new';
 };
 
+type State = {
+  loading: boolean;
+  posts: Post[];
+};
+
 const ListContainer = ({ type }: Props) => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [state, setState] = useState<State>({ loading: true, posts: [] });
 
-  useEffect(() => {
-    api.stories(type).then(setPosts);
-  }, []);
+  useEffect(
+    () => {
+      if (!state.loading) {
+        setState({ ...state, loading: true });
+      }
 
-  return <List posts={posts} />;
+      api.stories(type).then(posts => setState({ posts, loading: false }));
+    },
+    [type]
+  );
+
+  return state.loading ? <Loading /> : <List posts={state.posts} />;
 };
 
 export default ListContainer;
