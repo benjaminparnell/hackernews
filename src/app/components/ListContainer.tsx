@@ -1,42 +1,20 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { unstable_createResource as createResource } from 'react-cache';
 import api from '../api';
-
+import { StoryType, Post } from '../types';
 import List from './List';
-import Loading from './Loading';
 
-export type Post = {
-  title: string;
-  by: string;
-  url: string;
-  score: number;
-  descendants: number;
-};
+const APIResource = createResource<StoryType, Post[]>((type: StoryType) =>
+  api.stories(type)
+);
 
 type Props = {
-  type: 'top' | 'new';
-};
-
-type State = {
-  loading: boolean;
-  posts: Post[];
+  type: StoryType;
 };
 
 const ListContainer = ({ type }: Props) => {
-  const [state, setState] = useState<State>({ loading: true, posts: [] });
-
-  useEffect(
-    () => {
-      if (!state.loading) {
-        setState({ ...state, loading: true });
-      }
-
-      api.stories(type).then(posts => setState({ posts, loading: false }));
-    },
-    [type]
-  );
-
-  return state.loading ? <Loading /> : <List posts={state.posts} />;
+  const posts = APIResource.read(type);
+  return <List posts={posts} />;
 };
 
 export default ListContainer;
