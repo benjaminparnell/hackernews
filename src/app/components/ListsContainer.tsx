@@ -12,7 +12,7 @@ const ListsContainer = () => {
   return (
     <React.Fragment>
       <TypeSelector setActiveTab={setActiveTab} />
-
+      <hr />
       <Visibility visible={activeTab === 'new'}>
         <Suspense fallback={<Loading />}>
           <ListContainer type="new" />

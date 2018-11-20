@@ -1,10 +1,19 @@
 import * as React from 'react';
 import { parse } from 'url';
+import styled from 'styled-components';
 import { Post } from '../types';
 
 type Props = {
   posts: Post[];
 };
+
+const ListCardLink = styled.a`
+  color: palevioletred;
+
+  &:visited {
+    color: grey;
+  }
+`;
 
 const ListCard = ({
   index,
@@ -15,13 +24,13 @@ const ListCard = ({
   descendants
 }: Post & { index: number }) => (
   <div>
-    <h2>
+    <h3>
       {index}.{' '}
-      <a href={url} target="_blank">
+      <ListCardLink href={url} target="_blank">
         {title}
-      </a>{' '}
+      </ListCardLink>{' '}
       {url && `(${parse(url).host})`}
-    </h2>
+    </h3>
     <p>
       {score} points by {by} |{' '}
       {descendants ? `${descendants} comments` : 'discuss'}
