@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "react",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "importHelpers": true,
+    "lib": ["es2015", "dom", "es6"]
+  },
+  "exclude": ["node_modules", ".git"]
+}
