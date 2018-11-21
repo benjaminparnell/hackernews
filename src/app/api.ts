@@ -23,8 +23,12 @@ class Api {
 
   stories(type: string) {
     return this.fetch(`${type}stories`).then((ids: number[]) =>
-      Promise.all(ids.slice(0, 25).map(id => this.fetch(`item/${id}`)))
+      Promise.all(ids.slice(0, 25).map(id => this.item(id)))
     );
+  }
+
+  item(id: number) {
+    return this.fetch(`item/${id}`);
   }
 }
 

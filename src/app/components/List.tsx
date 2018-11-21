@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { parse } from 'url';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Post } from '../types';
 
 type Props = {
@@ -16,6 +17,7 @@ const ListCardLink = styled.a`
 `;
 
 const ListCard = ({
+  id,
   index,
   title,
   by,
@@ -33,7 +35,9 @@ const ListCard = ({
     </h3>
     <p>
       {score} points by {by} |{' '}
-      {descendants ? `${descendants} comments` : 'discuss'}
+      <Link to={`/item/${id}`}>
+        {descendants ? `${descendants} comments` : 'discuss'}
+      </Link>
     </p>
   </div>
 );
