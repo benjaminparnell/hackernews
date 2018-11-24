@@ -2,13 +2,14 @@ import * as React from 'react';
 import { parse } from 'url';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Points from './Points';
 import { Post } from '../types';
 
 type Props = {
   posts: Post[];
 };
 
-const ListCardLink = styled.a`
+export const ListCardLink = styled.a`
   color: palevioletred;
 
   &:visited {
@@ -34,7 +35,7 @@ const ListCard = ({
       {url && `(${parse(url).host})`}
     </h3>
     <p>
-      {score} points by {by} |{' '}
+      <Points score={score} /> by {by} |{' '}
       <Link to={`/item/${id}`}>
         {descendants ? `${descendants} comments` : 'discuss'}
       </Link>

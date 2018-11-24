@@ -30,6 +30,10 @@ class Api {
   item(id: number) {
     return this.fetch(`item/${id}`);
   }
+
+  comments(ids: number[]) {
+    return Promise.all(ids.map(id => this.item(id)));
+  }
 }
 
 export default new Api();
