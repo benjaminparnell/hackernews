@@ -4,16 +4,17 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Points from './Points';
 import { Post } from '../types';
+import colors from '../colors';
 
 type Props = {
   posts: Post[];
 };
 
 export const ListCardLink = styled.a`
-  color: palevioletred;
+  color: ${colors.primary};
 
   &:visited {
-    color: grey;
+    color: ${colors.secondary};
   }
 `;
 
