@@ -5,6 +5,7 @@ import Loading from './Loading';
 import TypeSelector from './TypeSelectorContainer';
 import Visibility from './Visibility';
 const ListContainer = lazy(() => import('./ListContainer'));
+const TYPES: StoryType[] = ['new', 'top'];
 
 const ListsContainer = () => {
   const [activeTab, setActiveTab] = useState<StoryType>('top');
@@ -13,17 +14,14 @@ const ListsContainer = () => {
     <React.Fragment>
       <TypeSelector setActiveTab={setActiveTab} />
       <hr />
-      <Visibility visible={activeTab === 'new'}>
-        <Suspense fallback={<Loading />}>
-          <ListContainer type="new" />
-        </Suspense>
-      </Visibility>
 
-      <Visibility visible={activeTab === 'top'}>
-        <Suspense fallback={<Loading />}>
-          <ListContainer type="top" />
-        </Suspense>
-      </Visibility>
+      {TYPES.map(type => (
+        <Visibility visible={activeTab === type}>
+          <Suspense fallback={<Loading />}>
+            <ListContainer type={type} />
+          </Suspense>
+        </Visibility>
+      ))}
     </React.Fragment>
   );
 };
