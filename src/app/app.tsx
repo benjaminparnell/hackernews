@@ -19,14 +19,9 @@ render(
         <Route path="/" exact={true} component={() => <ListsContainer />} />
         <Route
           path="/item/:id"
-          render={props => {
-            const {
-              match: {
-                params: { id }
-              }
-            } = props;
-            return <ItemContainer id={parseInt(id, 10)} />;
-          }}
+          render={props => (
+            <ItemContainer id={parseInt(props.match.params.id, 10)} />
+          )}
         />
       </React.Suspense>
     </Router>

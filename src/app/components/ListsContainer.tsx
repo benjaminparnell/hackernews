@@ -16,7 +16,7 @@ const ListsContainer = () => {
       <hr />
 
       {TYPES.map(type => (
-        <Visibility visible={activeTab === type}>
+        <Visibility key={type} visible={activeTab === type}>
           <Suspense fallback={<Loading />}>
             <ListContainer type={type} />
           </Suspense>

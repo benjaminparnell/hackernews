@@ -1,20 +1,22 @@
 import * as React from 'react';
-import { useState } from 'react';
 import { unstable_createResource as createResource } from 'react-cache';
+import Loading from './Loading';
 import AuthorTimestamp from './AuthorTimestamp';
 import Points from './Points';
 import ItemTitle from './ItemTitle';
 import { Post } from '../types';
 import api from '../api';
+import Item from './Item';
 
 const ItemResource = createResource<number, Post>(id => api.item(id));
 
-type Props = {
+type ItemContainerProps = {
   id: number;
 };
 
-const ItemContainer = ({ id }: Props) => {
+const ItemContainer = ({ id }: ItemContainerProps) => {
   const item = ItemResource.read(id);
+
   return (
     <div>
       <ItemTitle title={item.title} url={item.url} />
@@ -24,26 +26,12 @@ const ItemContainer = ({ id }: Props) => {
         <AuthorTimestamp by={item.by} time={item.time} />
       </p>
       <hr />
-      {item.kids && item.kids.map(kidId => <Item key={kidId} id={kidId} />)}
-    </div>
-  );
-};
-
-const Item = ({ id }: Props) => {
-  const [hidden, setHidden] = useState<boolean>(false);
-  const item = ItemResource.read(id);
-
-  return (
-    <div>
-      <p>
-        <AuthorTimestamp by={item.by} time={item.time} />{' '}
-        <span onClick={() => setHidden(!hidden)}>
-          {hidden ? `[+${item.kids ? item.kids.length + 1 : '1'}]` : `[-]`}
-        </span>
-      </p>
-
-      <div hidden={hidden} dangerouslySetInnerHTML={{ __html: item.text }} />
-      <hr />
+      {item.kids &&
+        item.kids.map(kidId => (
+          <React.Suspense key={kidId} fallback={<Loading />}>
+            <Item id={kidId} level={0} />
+          </React.Suspense>
+        ))}
     </div>
   );
 };
