@@ -14,14 +14,18 @@ const TypeButton = styled.button`
   margin-right: 1em;
 `;
 
+const TYPES: { label: string; type: StoryType }[] = [
+  { label: 'Top', type: 'top' },
+  { label: 'New', type: 'new' }
+];
+
 const TypeSelector = ({ setActiveTab }: Props) => (
   <div>
-    <TypeButton type="button" onClick={() => setActiveTab('top')}>
-      Top
-    </TypeButton>
-    <TypeButton type="button" onClick={() => setActiveTab('new')}>
-      New
-    </TypeButton>
+    {TYPES.map(({ label, type }) => (
+      <TypeButton key={type} type="button" onClick={() => setActiveTab(type)}>
+        {label}
+      </TypeButton>
+    ))}
   </div>
 );
 
