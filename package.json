@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "parcel src/app/index.html",
     "build": "parcel build src/app/index.html",
-    "test": "echo \"Error: no test specified\""
+    "test": "echo \"Error: no test specified\"",
+    "now-build": "npm run build"
   },
   "keywords": [],
   "author": "Ben Parnell <benjaminparnell.94@gmail.com>",
