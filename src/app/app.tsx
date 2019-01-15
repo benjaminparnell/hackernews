@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { render } from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
@@ -15,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-render(
+const App = () => (
   <ThemeProvider theme={colors}>
     <Layout>
       <GlobalStyle />
@@ -31,6 +30,7 @@ render(
         </React.Suspense>
       </Router>
     </Layout>
-  </ThemeProvider>,
-  document.getElementById('root')
+  </ThemeProvider>
 );
+
+export default App;
