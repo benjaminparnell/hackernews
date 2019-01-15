@@ -1,15 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { StoryType } from '../types';
-import colors from '../colors';
 
 type Props = {
   setActiveTab: (type: StoryType) => void;
 };
 
 const TypeButton = styled.button`
-  border: 2px solid ${colors.primary};
-  color: ${colors.primary};
+  border: 2px solid ${props => props.theme.primary};
+  color: ${props => props.theme.primary};
   font-size: 1.2em;
   padding: 0.75em 1.1em;
   margin-right: 1em;
