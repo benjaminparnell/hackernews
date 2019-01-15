@@ -12,8 +12,7 @@ const ListsContainer = () => {
 
   return (
     <React.Fragment>
-      <TypeSelector setActiveTab={setActiveTab} />
-      <hr />
+      <TypeSelector setActiveTab={setActiveTab} activeTab={activeTab} />
 
       {TYPES.map(type => (
         <Visibility key={type} visible={activeTab === type}>

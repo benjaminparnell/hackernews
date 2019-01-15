@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { unstable_createResource as createResource } from 'react-cache';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Post } from '../types';
 import AuthorTimestamp from './AuthorTimestamp';
 import Visibility from './Visibility';
@@ -16,7 +16,15 @@ type ItemProps = {
 const ItemResource = createResource<number, Post>(id => api.item(id));
 
 const ItemWrapper = styled.div<{ level: number }>`
-  ${props => props.level && `margin-left: ${props.level * 15}px;`}
+  ${props =>
+    props.level &&
+    css`
+      margin-left: ${props.level * 15}px;
+
+      @media (max-width: 600px) {
+        margin-left: ${props.level * 10}px;
+      }
+    `}
   margin-bottom: 30px;
 `;
 
