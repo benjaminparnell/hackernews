@@ -17,7 +17,7 @@ export const ListCardLink = styled.a`
   }
 `;
 
-const ListCard = ({
+export const ListCard = ({
   id,
   index,
   title,
