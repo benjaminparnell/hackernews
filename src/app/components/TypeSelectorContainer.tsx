@@ -23,7 +23,7 @@ const ButtonWrapper = styled.div`
   ${clearFix()}
 `;
 
-const TYPES: { label: string; type: StoryType }[] = [
+export const TYPES: { label: string; type: StoryType }[] = [
   { label: 'Top', type: 'top' },
   { label: 'New', type: 'new' }
 ];

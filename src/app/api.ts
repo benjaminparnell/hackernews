@@ -1,7 +1,14 @@
 import * as firebase from 'firebase/app';
 import 'firebase/database';
 
-class Api {
+export interface IApi {
+  fetch(path: string): Promise<any>;
+  stories(type: string): Promise<any[]>;
+  item(id: number): Promise<any>;
+  comments(ids: number[]): Promise<any[]>;
+}
+
+class Api implements IApi {
   private database: firebase.database.Database;
 
   constructor() {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render } from 'react-testing-library';
+import { render, cleanup } from 'react-testing-library';
 import { MemoryRouter } from 'react-router-dom';
 import List, { ListCard } from '../List';
 import { Post } from '../../types';
@@ -19,6 +19,8 @@ const examplePost: Post = {
 const posts: Post[] = [examplePost, examplePost, examplePost];
 
 describe('<List />', () => {
+  afterEach(cleanup);
+
   const renderList = (posts: Post[]) => {
     return render(
       <MemoryRouter>
@@ -34,6 +36,8 @@ describe('<List />', () => {
 });
 
 describe('<ListCard />', () => {
+  afterEach(cleanup);
+
   const renderCard = (post: Post) => {
     return render(
       <MemoryRouter>
@@ -43,7 +47,7 @@ describe('<ListCard />', () => {
   };
 
   it('should match snapshot', () => {
-    expect(renderCard(examplePost)).toMatchSnapshot();
+    expect(renderCard(examplePost).container.firstChild).toMatchSnapshot();
   });
 
   it('should render "discuss" if its post has no descendants', () => {
