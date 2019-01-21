@@ -1,7 +1,7 @@
-import * as React from 'react';
+import { useState } from 'react';
 
 const useToggle = (): [boolean, () => void] => {
-  const [state, setState] = React.useState(false);
+  const [state, setState] = useState(false);
   return [state, () => setState(!state)];
 };
 
