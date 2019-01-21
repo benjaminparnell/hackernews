@@ -18,13 +18,13 @@ npm install
 npm run dev
 ```
 
-# Build
+## Build
 
 ```
 npm run build
 ```
 
-# Test
+## Test
 
 ```
 npm test
